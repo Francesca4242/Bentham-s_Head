@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Italianno|Vollkorn" rel="stylesheet">
 </head>
 <body>
+  <img class="logo" src="logo.jpg" alt="logo">
+
 	<style>
-  h1{
-    font-family: 'Vollkorn', serif;
-    font-size: 76px;
+  img.logo{
+    border-radius: 999px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6cm;
+    display:block;
   }
+  body {
+  background-image: url("wordcloud (1).jpg");
+  }
+}
+  
 div.tab {
 
     overflow: hidden;
@@ -15,6 +24,9 @@ div.tab {
     border: 1px solid #ccc;
 
     background-color: #f1f1f1;
+margin-left: auto;
+margin-right: auto;
+display: inline block;
 
 }
 
@@ -86,9 +98,8 @@ var i, tabcontent, tablinks;
 
 </script>
 
-<h1>Locate Bentham</h1>
 <div class="tab">
-  <button class="tablinks" onclick="changeTab(event, 'OurMap')"> Our Map</button>
+  <button class="tablinks" onclick="changeTab(event, 'OurMap')"> Mapping Bentham</button>
   <button class="tablinks" onclick="changeTab(event, 'Scattergram')"> Scattergram</button>
   <button class="tablinks" onclick="changeTab(event, 'TranscribeBentham')"> Transcribe Bentham</button>
 </div>
@@ -187,6 +198,8 @@ function buildResultList(docview, loc) {
 <div id="TranscribeBentham" class="tabcontent" >
 
 </div>
+
+
 
 </body>
 </html>
