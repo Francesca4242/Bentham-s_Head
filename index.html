@@ -221,6 +221,8 @@ var i, tabcontent, tablinks;
 <div id="OurMap" class="tabcontent">
 	<h1>Our map</h1>
   <div id="map" style="width:500px; height:500px"></div>
+  <div id="docview" style="width:500px; height:500px"></div>
+  
   <script>
     var map;
     function initMap() {
@@ -238,39 +240,67 @@ var i, tabcontent, tablinks;
 <script>
 // Code to load data
 
-async function getData() {
+var data;
+var locations;
+
+async function loadData() {
   var parser = new DOMParser();
-  a = await fetch("data/data.json")
-  b = await a.json()  
-//  b.forEach(d => { d.newId=d.id.substring(0,10) } );
-  data = b;
+  var a = await fetch("data/data.json")
+  var b = await a.json()  
+  var data = b.filter(g => g.data.length < 5000000);
   
   a = await fetch("https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json")
   b = await a.json()
-
+  
   locations = {}
-  b.forEach( l => { locations[l.name] = {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}; } );
-  
-  data.forEach( z => {
-    z.data.split(/[\s<>]+/).forEach(w => {
-      if (w in locations) {
-        z.locations = z.locations || [];
-        z.locations.push(locations[w]);
-        new google.maps.Marker({
-          position: locations[w],
-          map: map,
-          title: z.data
-        });
-      }
-    });
-    
-    
-  });
-  
-  
+  b.forEach( l => { locations[l.name] = { name: l.name, pos: {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}}; } );
+  delete b;
 }
 
+function displayData() {
+  data.forEach( z => {
+    z.data.split(/[\s<>]+/).forEach(w => {
+      if (locations[w]) {
+        var loc = locations[w];
+        if (!loc.documents)
+          loc.documents = [];
+        loc.documents.push(z);
+      }
+    });    
+  });
+  
+  for (var loc in locations) {
+    var location_obj = locations[loc];
+    if (location_obj.documents) {
+      addmarker(location_obj);
+    }
+  }
+}
 
+function addmarker(loc) {
+      var marker = new google.maps.Marker({
+        position: loc.pos,
+        map: map,
+        title: loc.name + " (" + loc.documents.length.toString() + " references)",
+      });
+      marker.addListener('click', function(e) {
+        buildResultList(docview, loc);
+      });
+}
+
+function buildResultList(docview, loc) {
+  docview.innerHTML = "";
+  
+  loc.documents.forEach(doc => {
+  
+    var div=document.createElement('div');
+    div.innerHTML = "<b>" + doc.id + "</b><p>"+doc.data+"</p>";
+    docview.appendChild(div);
+  
+  });
+  
+
+}
 
 </script>
 </div>
