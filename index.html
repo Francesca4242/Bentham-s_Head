@@ -107,26 +107,50 @@ var i, tabcontent, tablinks;
         center: {lat: 52, lng: 0},
         zoom: 5
       });
+      getData();
     }
   </script>
-  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw&callback=initMap"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw&callback=initMap"
   async defer></script>
--->
+
 
 <script>
 // Code to load data
 
-
-
 async function getData() {
   var parser = new DOMParser();
   a = await fetch("data/data.json")
+  b = await a.json()  
+//  b.forEach(d => { d.newId=d.id.substring(0,10) } );
+  data = b;
+  
+  a = await fetch("https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json")
   b = await a.json()
-  b.forEach(d => { d.newId=d.id.substring(0,10) } );
-  alert('done');
+
+  locations = {}
+  b.forEach( l => { locations[l.name] = {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}; } );
+  
+  data.forEach( z => {
+    z.data.split(/[\s<>]+/).forEach(w => {
+      if (w in locations) {
+        z.locations = z.locations || [];
+        z.locations.push(locations[w]);
+        new google.maps.Marker({
+          position: locations[w],
+          map: map,
+          title: z.data
+        });
+      }
+    });
+    
+    
+  });
+  
+  
 }
 
-getData();
+
+
 </script>
 </div>
 
