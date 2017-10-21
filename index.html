@@ -121,6 +121,7 @@ async function getData() {
   var parser = new DOMParser();
   a = await fetch("data/data.json")
   b = await a.json()
+  b.forEach(d => { d.newId=d.id.substring(0,10) } );
   alert('done');
 }
 
