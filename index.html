@@ -75,152 +75,7 @@
                                 <div class="col-md-12">
                               <h2>This is the content of tab two.</h2>
                                     <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-                                   
-                                </div>
-                            </div>
-                    </div>
-                    <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
-                        <div class="row">
-                                <div class="col-md-12">
-                              <h2>This is the content of tab three.</h2>
-                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-                                  
-                                </div>
-                            </div>
-                    </div>
-                    <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
-                    <div class="row">
-                        <div class="col-md-12">
-                              <h2>This is the content of tab four.</h2>
-                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-                                  
-                                </div>
-                            </div>
-                    </div>
-                    <div class="tab-pane  fade" id="tabBody4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" tabindex="0">
-                    <div class="row">
-                        <div class="col-md-12">
-                              <h2>This is the content of tab five.</h2>
-                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-                                  
-                                </div>
-                            </div>
-                    </div>
-                    <div class="tab-pane  fade" id="tabBody5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" tabindex="0">
-                    <div class="row">
-                        <div class="col-md-12">
-                              <h2>This is the content of tab six.</h2>
-                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-                                  
-                                </div>
-                            </div>
-                    </div>
-        </div>
-
-    </section>
-</div>
-
-	<style>
-
-  img.logo{
-    border-radius: 999px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 6cm;
-    display:block;
-  }
-  body {
-  background-image: url("wordcloud (1).jpg");
-  }
-}
-  
-div.tab {
-
-    overflow: hidden;
-
-    border: 1px solid #ccc;
-
-    background-color: #f1f1f1;
-
-}
-
-div.tab button {
-
-    background-color: inherit;
-
-    float: left;
-
-    border: none;
-
-    outline: none;
-
-    cursor: pointer;
-
-    padding: 14px 16px;
-
-    transition: 0.3s;
-
-}
-
-div.tab button:hover {
-
-    background-color: #ddd;
-
-}
-
-div.tab button.active {
-
-    background-color: #ccc;
-
-}
-
-.tabcontent {
-
-    display: none;
-
-    padding: 6px 12px;
-
-    border: 1px solid #ccc;
-
-    border-top: none;
-
-} 
-
-</style>
-
-<script>
-function changeTab(evt, cityName) {
-var i, tabcontent, tablinks;
-
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-} 
-
-
-</script>
-
-<div class="tab">
-  <button class="tablinks" onclick="changeTab(event, 'OurMap')"> Mapping Bentham</button>
-  <button class="tablinks" onclick="changeTab(event, 'Scattergram')"> Scattergram</button>
-  <button class="tablinks" onclick="changeTab(event, 'TranscribeBentham')"> Transcribe Bentham</button>
-</div>
-
-<div id="OurMap" class="tabcontent">
-	<h1>Our map</h1>
-  <div id="map" style="width:500px; height:500px"></div>
+                                    <div id="map" style="width:500px; height:500px"></div>
   <div id="docview" style="width:500px; height:500px"></div>
   
   <script>
@@ -303,15 +158,77 @@ function buildResultList(docview, loc) {
 }
 
 </script>
+
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                                <div class="col-md-12">
+                              <h2>This is the content of tab three.</h2>
+                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
+                                     <div class='tableauPlaceholder' id='viz1508590879306' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Be&#47;BenthamHackathon&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='2' /> <param name='site_root' value='' /><param name='name' value='BenthamHackathon&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Be&#47;BenthamHackathon&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1508590879306');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='860px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                                   
+
+                                  
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-12">
+                              <h2>This is the content of tab four.</h2>
+                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
+                                  
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-12">
+                              <h2>This is the content of tab five.</h2>
+                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
+                                  
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-12">
+                              <h2>This is the content of tab six.</h2>
+                                    <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
+                                  
+                                </div>
+                            </div>
+                    </div>
+        </div>
+
+    </section>
 </div>
 
-<div id="Scattergram" class="tabcontent">
-	<div class='tableauPlaceholder' id='viz1508590879306' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Be&#47;BenthamHackathon&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='2' /> <param name='site_root' value='' /><param name='name' value='BenthamHackathon&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Be&#47;BenthamHackathon&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1508590879306');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='860px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-</div>
+	<style>
 
-<div id="TranscribeBentham" class="tabcontent" >
+  img.logo{
+    border-radius: 999px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6cm;
+    display:block;
+  }
+  body {
+  background-image: url("wordcloud (1).jpg");
+  }
+}
+  
 
-</div>
+
+</style>
+
+
+
+
+
+
 
 
 
