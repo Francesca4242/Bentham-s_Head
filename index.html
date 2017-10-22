@@ -66,7 +66,7 @@
                                     <h3>Free-text search of Bentham's work.</h3>
                                     <input type="text" name="search1" id="search1" placeholder="Search Here">
                                     <p> Search using key phrases, location, correspondent and other identifiers</p>
-                                    <div class="doccontainer" ></div>
+                                    <div class="doccontainer" ><div id="docview">Choose a document!</div></div>
                                 </div>
                                 
                             </div>
@@ -84,7 +84,7 @@
                                       <div id="map" style="height:100%">Map loading...</div>
                                     </div>
                                     <div class="doccontainer" style="width:50%; height:500px; float:left; padding:10px">
-                                      <div id="docview">Choose a document!</div>
+                                      
                                     </div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw"></script>
 
@@ -102,7 +102,11 @@
 $(document).ready(function() {
     initMap();
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      //document.getElementById('
+      docview.parentElement.removeChild(docview);
+      $('.doccontainer')[$('#tabBody0').hasClass('active')?0:1].appendChild(docview);
+      
+      buildResultList(docview);
+      
       google.maps.event.trigger(map, 'resize');
     });
 });
@@ -111,6 +115,7 @@ $(document).ready(function() {
 
 var data;
 var locations;
+var docview = document.getElementById('docview');
 
 async function loadData() {
   var parser = new DOMParser();
@@ -151,7 +156,9 @@ function searchChanged(e) {
   document.getElementById('search1').value=search_str;
   document.getElementById('search2').value=search_str;
   
+  
   displayData();
+  
   
 }
 function doc_matches_search(doc, search_keys) {
@@ -188,6 +195,7 @@ function displayData() {
       }
     }
   }
+  buildResultList(docview);
 }
 function addmarker(loc, show) {
    if (!loc.marker) {
@@ -206,14 +214,23 @@ function addmarker(loc, show) {
 function buildResultList(docview, loc) {
   docview.innerHTML = "";
   
-  loc.documents.forEach(doc => {
+  var doclist = data;
+  if (loc) doclist = loc.documents;
+
+  if (!doclist) return;
   
-    var div=document.createElement('div');
-    div.className = 'toggle';
-    div.innerHTML = "<b>" + doc.id + "</b><p>"+doc.data+"</p>";
-    docview.appendChild(div);
-  
-  });
+  var found = 0;
+  for (var i=0; (i<doclist.length) && (found<100); i++) {
+    var doc = doclist[i];
+    if (doc.matchesQuery) {
+      found++;
+    
+      var div=document.createElement('div');
+      div.className = 'toggle';
+      div.innerHTML = "<b>" + doc.id + "</b><p>"+doc.data+"</p>";
+      docview.appendChild(div);
+    }
+  }
   
   $(".toggle").click(function () {
     $(this).toggleClass('open');
@@ -305,7 +322,6 @@ Bentham had originally intended that his head should be part of the Auto-Icon, a
 	<style>
   #docview {
     height: 100%;
-    background-color: #ddb;
     overflow-y:scroll;
   }
   
@@ -324,6 +340,10 @@ Bentham had originally intended that his head should be part of the Auto-Icon, a
     max-height: 100px;
     border: 1px solid #331;
     overflow: hidden;
+    margin: 3px;
+    border-radius: 4px;
+    padding:5px;
+    background-color: #ddb;
   }
   
   #docview > div.open {
