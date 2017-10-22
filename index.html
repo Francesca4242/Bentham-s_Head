@@ -114,6 +114,10 @@ async function loadData() {
   b.forEach( l => { locations[l.name] = { name: l.name, pos: {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}}; } );
   delete b;
   
+  displayData();
+}
+
+function displayData() {
   data.forEach( z => {
     z.data.split(/[\s<>]+/).forEach(w => {
       if (locations[w]) {
@@ -127,76 +131,21 @@ async function loadData() {
   
   for (var loc in locations) {
     var location_obj = locations[loc];
-    if (!location_obj.documents) {
-      delete locations[loc];
-    }
-  }
-      
-  displayData();
-}
-function searchChanged(e) {
-  var search_str = e.target.value;
-  
-  document.getElementById('search1').value=search_str;
-  document.getElementById('search2').value=search_str;
-  
-  displayData();
-  
-}
-
-function doc_matches_search(doc, search_keys) {
-   for (var i=0; i<search_keys.length; i++) {
-     if (!doc.data.includes(search_keys[i])) {
-       doc.matchesQuery = false;
-       return false;
-     }
-   }
-   doc.matchesQuery = true;
-   return true;   
-}
-
-function displayData() {
-  document.getElementById('search1').addEventListener("input", searchChanged);
-  document.getElementById('search2').addEventListener("input", searchChanged);
-
-  var search_keys = document.getElementById('search2').value.split(/[\s]+/);
-
-  data.forEach( z => {
-    delete z.matchesQuery;
-  });
-
-  for (var loc in locations) {
-    var location_obj = locations[loc];
-    if (location_obj.documents.some(z => {z.matchesQuery})) {
-      addmarker(location_obj, true);
-    } else {
-      addmarker(location_obj, false);
-      for (var i = 0; i < location_obj.documents.length; i++) {
-        var doc = location_obj.documents[i];
-        if ('matchesQuery' in doc)
-          continue;
-        if (doc_matches_search(doc, search_keys)) {
-          addmarker(location_obj, true);
-          break;
-        };
-      }
+    if (location_obj.documents) {
+      addmarker(location_obj);
     }
   }
 }
 
-function addmarker(loc, show) {
-   if (!loc.marker) {
-    var marker = new google.maps.Marker({
-      position: loc.pos,
-      map: map,
-      title: loc.name + " (" + loc.documents.length.toString() + " references)",
-    });
-    marker.addListener('click', function(e) {
-      buildResultList(docview, loc);
-    });
-    loc.marker = marker;
-  }
-  loc.marker.setMap(show?map:null);
+function addmarker(loc) {
+      var marker = new google.maps.Marker({
+        position: loc.pos,
+        map: map,
+        title: loc.name + " (" + loc.documents.length.toString() + " references)",
+      });
+      marker.addListener('click', function(e) {
+        buildResultList(docview, loc);
+      });
 }
 
 function buildResultList(docview, loc) {
@@ -267,13 +216,13 @@ function buildResultList(docview, loc) {
 	<style>
 
 
-#docview {
-  background-color: #ddb;
-}
+  #docview {
+    background-color: #ddb;
+  }
 
-#docview {
-  background-color: #ddb;
-}
+  #docview {
+    background-color: #ddb;
+  }
 
   img.logo{
     border-radius: 999px;
@@ -301,7 +250,7 @@ function buildResultList(docview, loc) {
 </style>
 
 <footer>
-  <img class="panopticon" src="panopticon.png" alt="panopticon">
+  <img class="panopticon" src="panopticon.jpg" alt="panopticon">
 </footer>
 
 
