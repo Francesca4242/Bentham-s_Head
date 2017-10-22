@@ -80,13 +80,15 @@
                                     <p>Search using key phrases, location, correspondent and other identifiers </p>
                                     <input type="text" name="search2" id="search2" style="display:block; width:100%" placeholder="Search Here" />
                                     <div style="width:50%; height:500px; float:left; padding:10px">
-                                      <div id="map">Map loading...</div>
+                                      <div id="map" style="height:100%">Map loading...</div>
                                     </div>
                                     <div style="width:50%; height:500px; float:left; padding:10px">
                                       <div id="docview">Choose a document!</div>
                                     </div>
-  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw"></script>
+
   <script>
+  
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -95,6 +97,10 @@
       });
       //loadData();
     }
+
+$(document).ready(function() {
+    initMap();
+});
 
 // Code to load data
 
@@ -163,7 +169,6 @@ function buildResultList(docview, loc) {
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw&callback=initMap" async defer></script>
 
 
                                 </div>
