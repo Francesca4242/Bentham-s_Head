@@ -64,7 +64,7 @@
                                 <div class="col-md-12">
                               <h2>Searching Bentham</h2>
                                     <h3>Free-text search of Bentham's work.</h3>
-                                    <input type="text" name="search1" id="search1">
+                                    <input type="text" name="search1" id="search1" placeholder="Search Here">
                                     <p> Search using key phrases, location, correspondent and other identifiers</p>
                                 </div>
                                 
@@ -78,19 +78,33 @@
                               <h2>Mapping Bentham</h2>
                               <h3>Bentham's works laid out on a map by locations mentioned in the text and data</h3>
                                     <p>Search using key phrases, location, correspondent and other identifiers </p>
-                                    <input type="text" name="search2" id="search2">
-                                    <div id="map" style="width:500px; height:500px"></div>
-  <div id="docview" style="width:500px; height:500px"></div>
-  
+                                    <input type="text" name="search2" id="search2" style="display:block; width:100%" placeholder="Search Here" />
+                                    <div style="width:50%; height:500px; float:left; padding:10px">
+                                      <div id="map" style="height:100%">Map loading...</div>
+                                    </div>
+                                    <div style="width:50%; height:500px; float:left; padding:10px">
+                                      <div id="docview">Choose a document!</div>
+                                    </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw"></script>
+
   <script>
+  
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 52, lng: 0},
         zoom: 5
       });
-      loadData();
+      //loadData();
     }
+
+$(document).ready(function() {
+    initMap();
+    $(document).onhashchanged(function() {
+      google map event resize;
+      // TODO
+    });
+});
 
 // Code to load data
 
@@ -110,10 +124,6 @@ async function loadData() {
   b.forEach( l => { locations[l.name] = { name: l.name, pos: {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}}; } );
   delete b;
   
-  displayData();
-}
-
-function displayData() {
   data.forEach( z => {
     z.data.split(/[\s<>]+/).forEach(w => {
       if (locations[w]) {
@@ -127,23 +137,71 @@ function displayData() {
   
   for (var loc in locations) {
     var location_obj = locations[loc];
-    if (location_obj.documents) {
-      addmarker(location_obj);
+    if (!location_obj.documents) {
+      delete locations[loc];
+    }
+  }
+      
+  displayData();
+}
+function searchChanged(e) {
+  var search_str = e.target.value;
+  
+  document.getElementById('search1').value=search_str;
+  document.getElementById('search2').value=search_str;
+  
+  displayData();
+  
+}
+function doc_matches_search(doc, search_keys) {
+   for (var i=0; i<search_keys.length; i++) {
+     if (!doc.data.includes(search_keys[i])) {
+       doc.matchesQuery = false;
+       return false;
+     }
+   }
+   doc.matchesQuery = true;
+   return true;   
+}
+function displayData() {
+  document.getElementById('search1').addEventListener("input", searchChanged);
+  document.getElementById('search2').addEventListener("input", searchChanged);
+  var search_keys = document.getElementById('search2').value.split(/[\s]+/);
+  data.forEach( z => {
+    delete z.matchesQuery;
+  });
+  for (var loc in locations) {
+    var location_obj = locations[loc];
+    if (location_obj.documents.some(z => {z.matchesQuery})) {
+      addmarker(location_obj, true);
+    } else {
+      addmarker(location_obj, false);
+      for (var i = 0; i < location_obj.documents.length; i++) {
+        var doc = location_obj.documents[i];
+        if ('matchesQuery' in doc)
+          continue;
+        if (doc_matches_search(doc, search_keys)) {
+          addmarker(location_obj, true);
+          break;
+        };
+      }
     }
   }
 }
-
-function addmarker(loc) {
-      var marker = new google.maps.Marker({
-        position: loc.pos,
-        map: map,
-        title: loc.name + " (" + loc.documents.length.toString() + " references)",
-      });
-      marker.addListener('click', function(e) {
-        buildResultList(docview, loc);
-      });
+function addmarker(loc, show) {
+   if (!loc.marker) {
+    var marker = new google.maps.Marker({
+      position: loc.pos,
+      map: map,
+      title: loc.name + " (" + loc.documents.length.toString() + " references)",
+    });
+    marker.addListener('click', function(e) {
+      buildResultList(docview, loc);
+    });
+    loc.marker = marker;
+  }
+  loc.marker.setMap(show?map:null);
 }
-
 function buildResultList(docview, loc) {
   docview.innerHTML = "";
   
@@ -155,11 +213,9 @@ function buildResultList(docview, loc) {
   
   });
   
-
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw&callback=initMap" async defer></script>
 
 
                                 </div>
@@ -210,6 +266,15 @@ function buildResultList(docview, loc) {
 </div>
 
 	<style>
+
+
+  #docview {
+    background-color: #ddb;
+  }
+
+  #docview {
+    background-color: #ddb;
+  }
 
   img.logo{
     border-radius: 999px;
