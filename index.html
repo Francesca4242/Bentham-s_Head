@@ -95,14 +95,13 @@
         center: {lat: 52, lng: 0},
         zoom: 5
       });
-      //loadData();
+      loadData();
     }
 
 $(document).ready(function() {
     initMap();
-    $(document).onhashchanged(function() {
-      google map event resize;
-      // TODO
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      google.maps.event.trigger(map, 'resize');
     });
 });
 
