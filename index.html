@@ -214,10 +214,8 @@ function buildResultList(docview, loc) {
   });
   
   $(".toggle").click(function () {
-    $(this).animate({
-                        height: '100%'
-                    });
-  }
+    $(this).toggleClass('open');
+  });
   
 }
 
@@ -294,6 +292,11 @@ function buildResultList(docview, loc) {
     max-height: 100px;
     border: 1px solid #331;
     overflow: hidden;
+  }
+  
+  #docview > div.open {
+    max-height: 99999px;
+    background-color: #eec;
   }
 
   img.logo{
