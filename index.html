@@ -92,7 +92,7 @@
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 52, lng: 0},
+        center: {lat: 58, lng: -10},
         zoom: 5
       });
       loadData();
@@ -207,10 +207,17 @@ function buildResultList(docview, loc) {
   loc.documents.forEach(doc => {
   
     var div=document.createElement('div');
+    div.className = 'toggle';
     div.innerHTML = "<b>" + doc.id + "</b><p>"+doc.data+"</p>";
     docview.appendChild(div);
   
   });
+  
+  $(".toggle").click(function () {
+    $(this).animate({
+                        height: '100%'
+                    });
+  }
   
 }
 
@@ -290,6 +297,12 @@ Bentham had originally intended that his head should be part of the Auto-Icon, a
     height: 100%;
     background-color: #ddb;
     overflow-y:scroll;
+  }
+  
+  #docview > div {
+    max-height: 100px;
+    border: 1px solid #331;
+    overflow: hidden;
   }
 
   img.logo{
