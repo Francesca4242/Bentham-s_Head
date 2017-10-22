@@ -64,7 +64,7 @@
                                 <div class="col-md-12">
                               <h2>Searching Bentham</h2>
                                     <h3>Free-text search of Bentham's work.</h3>
-                                    <input type="text" name="search1" id="search1">
+                                    <input type="text" name="search1" id="search1" placeholder="Search Here">
                                     <p> Search using key phrases, location, correspondent and other identifiers</p>
                                 </div>
                                 
@@ -78,9 +78,9 @@
                               <h2>Mapping Bentham</h2>
                               <h3>Bentham's works laid out on a map by locations mentioned in the text and data</h3>
                                     <p>Search using key phrases, location, correspondent and other identifiers </p>
-                                    <input type="text" name="search2" id="search2" style="display:block; width:100%">
+                                    <input type="text" name="search2" id="search2" style="display:block; width:100%" placeholder="Search Here" />
                                     <div style="width:50%; height:500px; float:left; padding:10px">
-                                      <div id="map"></div>
+                                      <div id="map">Map loading...</div>
                                     </div>
                                     <div style="width:50%; height:500px; float:left; padding:10px">
                                       <div id="docview">Choose a document!</div>
@@ -93,7 +93,7 @@
         center: {lat: 52, lng: 0},
         zoom: 5
       });
-      loadData();
+      //loadData();
     }
 
 // Code to load data
