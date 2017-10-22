@@ -85,7 +85,7 @@
         center: {lat: 52, lng: 0},
         zoom: 5
       });
-      //getData();
+      loadData();
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfgX7gh8xsTZT_zO6klz__VqtRNvjhiw&callback=initMap"
@@ -102,7 +102,7 @@ async function loadData() {
   var parser = new DOMParser();
   var a = await fetch("data/data.json")
   var b = await a.json()  
-  var data = b.filter(g => g.data.length < 5000000);
+  data = b.filter(g => g.data.length < 5000000);
   
   a = await fetch("https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json")
   b = await a.json()
@@ -110,6 +110,8 @@ async function loadData() {
   locations = {}
   b.forEach( l => { locations[l.name] = { name: l.name, pos: {lat: parseFloat(l.lat), lng: parseFloat(l.lng)}}; } );
   delete b;
+  
+  displayData();
 }
 
 function displayData() {
